@@ -5,12 +5,14 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const superagent = require('superagent');
+const pg = require('pg');
 
 
 
 const PORT = process.env.PORT;
 const app = express();
 app.use(cors());
+const client = new.pg
 
 app.get('/', (request, response) => {
   response.send(`It's alllllive!`);
