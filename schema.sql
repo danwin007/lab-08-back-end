@@ -21,4 +21,5 @@ CREATE TABLE IF NOT EXISTS eventful (
     summary VARCHAR(255)
 );
 
--- set up db client, connect to the right - 
+
+-- postgres://yfkhoaronvfcpb:0f07225b96ac6ab03177e22ce9f98c1b6b81d54dd26fcf1821e22afc3bf83cf7@ec2-107-21-122-38.compute-1.amazonaws.com:5432/db839mrftpkioj

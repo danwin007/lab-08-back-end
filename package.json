@@ -1,7 +1,7 @@
 {
   "name": "lab-08-back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "Number and name of feature: ________________________________ Use SQL to build database, get information from DB or add to DB.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

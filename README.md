@@ -12,7 +12,6 @@ Finish time: 5:30
 
 Actual time needed to complete: 4 hours
 
-# back_end_testing
 **Author**: 
 **Version**: 1.0.0 
 
