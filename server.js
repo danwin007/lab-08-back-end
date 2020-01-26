@@ -22,25 +22,20 @@ app.get('/', (request, response) => {
 
 //Xrun npm init
 //Xrun npm install w/ express, cors, superagent
-
 //list out routes...
 // app.get('/location', locationHandler);
 
-
 app.get('/location', locationHandler);
-
-// app.get('/weather', weatherHandler);
-// app.get('/events', eventfulHandler);
-
+app.get('/weather', weatherHandler);
+app.get('/events', eventfulHandler);
 
 //callback functions
 
-
 function locationHandler(request, response) {
   let city = request.query.city;
-  console.log(request.query);
+  // console.log(request.query);
   let SQL = `SELECT * FROM explorer WHERE city='${city}';`;
-  console.log('this is my SQL', SQL);
+  // console.log('this is my SQL', SQL);
   client.query(SQL)
     .then(results => {
       if (results.rows.length > 0) {
@@ -68,45 +63,34 @@ function locationHandler(request, response) {
     });
 }
 
+function weatherHandler(request, response) {
+  let latitude = request.query.latitude;
+  let longitude = request.query.longitude;
+  const url = `https://api.darksky.net/forecast/${process.env.DARKSKY_API_KEY}/${latitude},${longitude}`;
+  superagent.get(url)
+    .then(data => {
+      const weatherSummaries = data.body.daily.data.map(day => {
+        return new Weather(day);
+      });
+      response.status(200).json(weatherSummaries);
+    })
+    .catch(() => {
+      errorHandler('not today satan.', request, response);
+    });
+}
 
 
-// let explorerQuery =
-
-// `SELECT * FROM explorer WHERE city=${city};`
-//       };
-// } else {
-
-
-
-// function weatherHandler(request, response) {
-//   let latitude = request.query.latitude;
-//   let longitude = request.query.longitude;
-//   const url = `https://api.darksky.net/forecast/${process.env.DARKSKY_API_KEY}/${latitude},${longitude}`;
-//   superagent.get(url)
-//     .then(data => {
-//       const weatherSummaries = data.body.daily.data.map(day => {
-//         return new Weather(day);
-//       });
-//       response.status(200).json(weatherSummaries);
-//     })
-//     .catch(() => {
-//       errorHandler('not today satan.', request, response);
-//     });
-// }
-
-
-// function eventfulHandler(request, response) {
-
-//   // console.log(request.query);
-//   let url = `http://api.eventful.com/json/events/search?location=${search_query}&app_key=${process.env.EVENTFUL_API_KEY}`;
-//   superagent.get(url)
-//     .then(data => {
-//       let eventfulData = JSON.parse(data.text).events.event;
-//       console.log(eventfulData);
-//       const eventsArr = eventfulData.map(value => new Event(value));
-//       response.send(eventsArr);
-//     });
-// }
+function eventfulHandler(request, response) {
+  const {search_query} = request.query;
+  let url = `http://api.eventful.com/json/events/search?location=${search_query}&app_key=${process.env.EVENTFUL_API_KEY}`;
+  superagent.get(url)
+    .then(data => {
+      let eventfulData = JSON.parse(data.text).events.event;
+      console.log(eventfulData);
+      const eventsArr = eventfulData.map(value => new Event(value));
+      response.send(eventsArr);
+    });
+}
 
 //destructuring: CHECK LINE 68* After looking at the results of request.query.______, take the result keys and create a line where you open an object {}, and fill it with needed key(s), equals out to request.query; THANKS LENA!
 
@@ -131,12 +115,10 @@ function Event(object) {
   this.summary = object.description;
 }
 
-
 //helper functions (error catching)
 function errorHandler(error, request, response) {
   response.status(500).send(error);
 }
-
 
 //server "listener"
 client.connect()
