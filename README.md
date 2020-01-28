@@ -1,4 +1,11 @@
 # lab-08-back-end
+## ReadMe Edits 1.27.20
+
+We worked on this lab as a mob programming group. I have forked and cloned the repo down for submission. It is currently incomplete as I have not deployed to Heroku.
+
+Sian Culligan was the driver and we all worked together in the conference room with Sian's laptop on the projector screen.
+
+-Daniel
 
 Number and name of feature: ________________________________
 Use SQL to build database, get information from DB or add to DB.
