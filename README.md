@@ -7,6 +7,10 @@ Sian Culligan was the driver and we all worked together in the conference room w
 
 -Daniel
 
+## Edit 1.28.20
+Time: 8:30pm
+Trying again to deploy. Forgot that .env file wouldn't come down from the forked repo.
+
 Number and name of feature: ________________________________
 Use SQL to build database, get information from DB or add to DB.
 
