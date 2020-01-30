@@ -21,4 +21,6 @@ CREATE TABLE eventful (
     summary VARCHAR(255)
 );
 
+INSERT INTO locations (city, formattedquery, latitude, longitude)
+VALUES ('seattle', 'etc', '100', '100');
                                                       
